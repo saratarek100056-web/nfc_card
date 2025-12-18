@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sara's Journey ❤️</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            background-color: #1e1e1e; /* خلفية الـ IDE الغامقة */
+            color: #d4d4d4;
+            font-family: 'Consolas', 'Courier New', monospace;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+            text-align: left; /* الكود يفضل شمال حتى لو عربي */
+        }
+
+        /* ده الصندوق اللي بيمثل "الحضن" */
+        .code-container {
+            background: #252526;
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid #333;
+            width: 90%;
+            max-width: 450px;
+            direction: ltr; 
+            position: relative;
+            z-index: 10;
+            /* أنيميشن الحضن الدافي */
+            animation: warmHug 3s infinite alternate ease-in-out;
+        }
+
+        /* تفاصيل ألوان الكود */
+        .keyword { color: #c586c0; font-weight: bold; } /* بنفسجي */
+        .method { color: #dcdcaa; }  /* أصفر */
+        .class-name { color: #4ec9b0; } /* تيركواز */
+        .comment { 
+            color: #6a9955; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* خط عربي واضح */
+            font-style: italic; 
+            font-size: 0.9em;
+        } 
+
+        /* الأنيميشن اللي بيخلي الصندوق ينور ويدفي */
+        @keyframes warmHug {
+            0% { box-shadow: 0 0 10px rgba(255, 160, 122, 0.2); transform: scale(1); }
+            100% { box-shadow: 0 0 40px rgba(255, 140, 0, 0.6); transform: scale(1.02); }
+        }
+
+        /* زرار زيادة حب */
+        .btn {
+            margin-top: 30px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            border: none;
+            padding: 12px 25px;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+            font-family: 'Segoe UI', sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="code-container" onclick="rainHearts()">
+        <pre><code style="line-height: 1.6;">
+<span class="keyword">try</span> {
+    <span class="class-name">Sarah</span>.<span class="method">keepGoing</span>(); <span class="comment">// بتحاولي ومكملة</span>
+    <span class="class-name">Sarah</span>.<span class="method">grow</span>();      <span class="comment">// بتكبري كل يوم</span>
+    
+} <span class="keyword">catch</span> (<span class="class-name">TiredException</span> | <span class="class-name">Doubts</span> e) {
+    
+    <span class="comment">// "أنا عارفة ان انتِ ساعات مش بتبقي شايفة..</span>
+    <span class="comment">// قد ايه انت كبرتِ، وقد ايه انتِ مستحملة.."</span>
+    <span class="comment">// "بس أنا شايفة ده وفخورة بيكِ اوي." ❤️</span>
+    
+    <span class="class-name">supportSystem</span>.<span class="method">enable</span>(); <span class="comment">// "أنا في ظهرك.." 👏</span>
+    
+    <span class="comment">// "يلا كملي ومتيأسيش.. محاولاتك دايما بتنجح."</span>
+    
+} <span class="keyword">finally</span> {
+    
+    <span class="comment">// "متنسيش تكوني مع ربنا.."</span>
+    <span class="comment">// "هو اللي بيحفظك وبيوفقك، خليكي معاه دايما."</span>
+    <span class="comment">// Status: BLESSED & LOVED ✨</span>
+}
+        </code></pre>
+    </div>
+
+    <button class="btn" onclick="rainHearts()">محتاجة حضن كمان 🤗</button>
+
+    <script>
+        // دالة مطر القلوب
+        function rainHearts() {
+            var duration = 3000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+                // إطلاق قلوب (Shapes: Heart)
+                confetti({
+                    particleCount: 5,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    shapes: ['heart'], // شكل القلوب
+                    colors: ['#FFC0CB', '#FF69B4', '#FF1493', '#FF4500'] // ألوان دافية
+                });
+                confetti({
+                    particleCount: 5,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    shapes: ['heart'],
+                    colors: ['#FFC0CB', '#FF69B4', '#FF1493', '#FF4500']
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+
+        // تشغيل القلوب أول ما الصفحة تفتح
+        window.onload = rainHearts;
+    </script>
+
+</body>
+</html>
