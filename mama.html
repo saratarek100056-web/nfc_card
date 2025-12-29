@@ -180,7 +180,13 @@
 
         // 2. وظيفة إرسال الحضن عبر تليجرام
         function sendHug() {
-            const status = document.getElementById('status');
+            // --- تشغيل الصوت ---
+            // تأكدي إن اسم الملف هنا هو نفس الاسم اللي رفعتيه بالظبط
+            var audio = new Audio('mama.mp3'); 
+            audio.play();
+
+            // ... (باقي الكود بتاع التليجرام والأنيميشن زي ما هو) ...
+                const status = document.getElementById('status');
             
             // --- بياناتك (تم دمجها بنجاح) ---
             const token = "8385520588:AAFow1uAKWVpkeQadgSXvTHZhaXhNq1mtgU"; 
