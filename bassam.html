@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الحقيقة 🦁</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #111;
+            color: #fff;
+            font-family: 'Cairo', sans-serif;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        /* --- الكاميرا --- */
+        #video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            transform: scaleX(-1);
+            display: none;
+            filter: brightness(0.6) contrast(1.1); /* تأثير درامي */
+        }
+
+        /* --- المحتوى --- */
+        .overlay {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.9);
+        }
+
+        /* --- الأزرار --- */
+        .btn {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px;
+            width: 100%;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            font-weight: bold;
+        }
+        .btn:active { transform: scale(0.95); }
+
+        .btn-start {
+            background: #e74c3c;
+            border: none;
+            box-shadow: 0 0 25px rgba(231, 76, 60, 0.4);
+            font-size: 1.2rem;
+            padding: 20px;
+        }
+
+        /* --- شاشة الخطأ (الصدمة) --- */
+        .error-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(200, 0, 0, 0.85); /* أحمر قوي */
+            z-index: 50;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: shake 0.5s;
+        }
+        .error-text {
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-shadow: 0 0 20px black;
+        }
+        .error-sub {
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        /* --- رسالة الحقيقة (King) --- */
+        .king-section {
+            display: none;
+            animation: fadeIn 1.5s;
+        }
+        .highlight-king {
+            color: #f1c40f;
+            font-size: 3rem;
+            font-weight: 900;
+            display: block;
+            margin: 15px 0;
+            letter-spacing: 2px;
+            text-shadow: 0 0 30px #f1c40f, 0 0 10px black;
+            font-family: sans-serif;
+        }
+
+        /* --- شرط الضحكة --- */
+        .smile-alert {
+            margin-top: 30px;
+            padding: 15px;
+            background: rgba(0,0,0,0.6);
+            border: 2px solid #e74c3c;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            animation: pulse 2s infinite;
+        }
+
+        /* --- النهاية --- */
+        .final-screen {
+            display: none;
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #1a1a1a;
+            z-index: 60;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        @keyframes shake { 0%, 100% {transform: translateX(0);} 25% {transform: translateX(-10px);} 75% {transform: translateX(10px);} }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0% { border-color: #e74c3c; } 50% { border-color: #c0392b; box-shadow: 0 0 15px #e74c3c; } 100% { border-color: #e74c3c; } }
+
+    </style>
+</head>
+<body>
+
+    <video id="video-bg" autoplay playsinline></video>
+
+    <div class="error-overlay" id="error-screen">
+        <div class="error-text">إجابة غلط !! ❌</div>
+        <div class="error-sub">مش ده اللي أنا شايفاه..</div>
+    </div>
+
+    <div class="overlay" id="ui-layer">
+        
+        <div id="step-1">
+            <h1 style="margin-bottom: 40px;">جاهز تواجه الحقيقة؟ 🤨</h1>
+            <button class="btn btn-start" onclick="openCamera()">اضغط عشان تواجه الحقيقة</button>
+        </div>
+
+        <div id="step-2" style="display: none;">
+            <h1>شايف مين قدامك دلوقتي؟</h1>
+            <button class="btn" onclick="triggerShock()">طالب طب مطحون 😫</button>
+            <button class="btn" onclick="triggerShock()">واحد تايه وسط الدحيحة 😵‍💫</button>
+            <button class="btn" onclick="triggerShock()">شخص عادي جداً 🚶</button>
+        </div>
+
+        <div id="step-3" class="king-section">
+            <p style="font-size: 1.1rem; color: #ddd;">أنت ممكن تكون شايف تعب..</p>
+            <p style="font-size: 1.2rem; font-weight: bold;">بس أنا شايفة</p>
+            
+            <span class="highlight-king">KING</span>
+            
+            <p>حتى لو اللي حواليك "أسود" (Lions).. <br>أنت <span style="color:#f1c40f;">الملك</span> بتاعهم. 🦁👑</p>
+
+            <div class="smile-alert">
+                ⚠️ <b>Error: System Locked</b><br>
+                السيستم مش هيقفل غير لما الملك يضحك!
+            </div>
+            
+            <button class="btn" style="background: #27ae60; border:none; margin-top:15px;" onclick="finish()">خلاص ضحكت أهو 😂</button>
+        </div>
+
+    </div>
+
+    <div class="final-screen" id="final">
+        <h1 style="color: #2ecc71; font-size: 3rem; margin-bottom: 20px;">✔</h1>
+        <p style="font-size: 1.4rem; line-height: 1.8; color: #fff;">
+            أيوه كده! <br>
+            أنا مراهنة عليك ومتأكدة مليون% إنك هتكسر الدنيا..
+            <br><br>
+            <span style="color: #f1c40f; font-weight: bold;">ربنا معاك يا بطل ❤️</span>
+        </p>
+    </div>
+
+    <script>
+        function openCamera() {
+            // فتح الكاميرا
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: false })
+                .then(function(stream) {
+                    const video = document.getElementById('video-bg');
+                    video.srcObject = stream;
+                    video.style.display = 'block';
+                    
+                    // النقل للخطوة التانية
+                    document.getElementById('step-1').style.display = 'none';
+                    document.getElementById('step-2').style.display = 'block';
+                })
+                .catch(function(err) {
+                    alert("لازم توافق على الكاميرا عشان اللعبة تشتغل! 😉");
+                });
+        }
+
+        function triggerShock() {
+            // 1. إظهار شاشة الخطأ الحمراء
+            const errorScreen = document.getElementById('error-screen');
+            errorScreen.style.display = 'flex';
+            
+            // 2. إخفاء الاختيارات القديمة
+            document.getElementById('step-2').style.display = 'none';
+
+            // 3. بعد ثانية ونص، نقلب على الحقيقة
+            setTimeout(() => {
+                errorScreen.style.display = 'none'; // نخفي الأحمر
+                document.getElementById('step-3').style.display = 'block'; // نظهر الملك
+            }, 1800);
+        }
+
+        function finish() {
+            // قفل الكاميرا وإنهاء اللعبة
+            const video = document.getElementById('video-bg');
+            if(video.srcObject) {
+                video.srcObject.getTracks().forEach(track => track.stop());
+            }
+            video.style.display = 'none';
+            document.getElementById('ui-layer').style.display = 'none';
+            document.getElementById('final').style.display = 'flex';
+        }
+    </script>
+
+</body>
+</html>
