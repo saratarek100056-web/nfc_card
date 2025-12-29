@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إلى أمي الحبيبة ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            /* خلفية بتدرج ألوان الغروب الهادي اللي بتحبيه */
+            background: linear-gradient(135deg, #fff1eb 0%, #ace0f9 100%);
+            font-family: 'Cairo', sans-serif; /* خط عربي شيك */
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #444;
+            overflow: hidden;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            width: 85%;
+            max-width: 400px;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        h1 {
+            color: #ff6b81;
+            margin-bottom: 5px;
+            font-size: 1.6rem;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        /* تنسيق صندوق الرسالة */
+        #message-box {
+            font-size: 1.1rem;
+            min-height: 100px; /* مساحة كافية للكلام */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2f3542;
+            margin: 10px 0 20px;
+            line-height: 1.6;
+            font-weight: bold;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            border-right: 5px solid #ff6b81; /* لمسة جمالية */
+        }
+
+        /* القلب النابض */
+        .heart-container {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .heart-container:active {
+            transform: scale(0.9); /* تأثير عند الضغط */
+        }
+
+        .heart {
+            background-color: #ff4757;
+            display: inline-block;
+            height: 100%;
+            width: 100%;
+            position: relative;
+            clip-path: path('M50 88.9L16.7 55.6C7.2 46.1 7.2 30.9 16.7 21.4s24.7-9.5 33.3 0l0 0 0 0c8.6-9.5 23.8-9.5 33.3 0s9.5 24.7 0 33.3L50 88.9z');
+            animation: pulse 1.5s infinite;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ff6b81, #ff4757);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.3);
+            font-family: inherit;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        /* رسالة التأكيد */
+        #status {
+            margin-top: 15px;
+            color: #2ed573;
+            font-weight: bold;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>يا ست الحبايب ❤️</h1>
+        <div class="subtitle">اضغطي على القلب عشان يوصلني</div>
+        
+        <div class="heart-container" onclick="sendHug()">
+            <div class="heart" id="mainHeart"></div>
+        </div>
+
+        <div id="message-box"></div>
+
+        <button class="btn" onclick="sendHug()">وحشتيني يا سارة 🫂</button>
+        
+        <div id="status">وصل لسارة يا حبيبتي.. وأنا كمان ببعتلك حضن! 💖</div>
+    </div>
+
+    <script>
+        // 1. رسايلك الجميلة (قاعدة البيانات)
+        const messages = [
+            "عارفة إن الحمل تقيل والشغل مبيخلصش، بس ربنا معاكِ وبيعينك وبيبارك في صحتك. 🤲",
+            "معلش.. عارفة إنك تعبانة، بس ربنا شايلك أجر كبير أوي على كل لحظة تعب بتتعبيها عشاننا. ✨",
+            "ارمى ورا ظهرك.. مفيش حاجة في الدنيا تستاهل زعلك أو حرقة دمك. ضحكتك أهم من أي مشاكل. 😊",
+            "كله هيعدي والله، زي ما عدا اللي أصعب منه.. سيبي تدبيرها للي خلقك وارتاحي شوية. 🌸",
+            "ما تشيليش هم بكرة، بكرة ده بتاع ربنا.. خليكي في النهاردة وافرحي وبس. ⛅",
+            "انتي الأمان في وسط الدوشة دي كلها.. ربنا ما يحرمني من حسك في الدنيا. 🏠",
+            "وحشتيني.. ببعتلك الطاقة والحب كله في الرسالة دي، خدي نفس عميق وابتسمي. 💖",
+            "انتي مش بس ماما، انتي الخير والبركة والرزق اللي في حياتي. 💎",
+            "وقت ما تحسي إن طاقتك خلصت، افتكري إن ربنا هو قوتك وسندك، وهيعينك تقومي وتكملي أقوى من الأول. 💪"
+        ];
+
+        // اختيار رسالة عشوائية عند الفتح
+        const msgBox = document.getElementById('message-box');
+        // دالة لاختيار رسالة عشوائية
+        function showRandomMessage() {
+            msgBox.innerText = messages[Math.floor(Math.random() * messages.length)];
+        }
+        // تشغيل الدالة أول ما الصفحة تفتح
+        showRandomMessage();
+
+        // 2. وظيفة إرسال الحضن
+        function sendHug() {
+            const status = document.getElementById('status');
+            
+            // إظهار رسالة التأكيد
+            status.style.opacity = '1';
+            
+            // --- (مكان كود التليجرام هيتحط هنا) ---
+            // sendToTelegram(); 
+            
+            // إخفاء الرسالة بعد 3 ثواني
+            setTimeout(() => {
+                status.style.opacity = '0';
+            }, 3000);
+        }
+    </script>
+
+</body>
+</html>
