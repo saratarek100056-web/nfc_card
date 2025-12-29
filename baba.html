@@ -8,7 +8,7 @@
     <style>
         /* --- إعدادات الصفحة --- */
         body {
-            background-color: #34495e; /* ليل */
+            background-color: #2c3e50; /* ليل */
             color: #fff;
             font-family: 'Cairo', sans-serif;
             height: 100vh;
@@ -41,196 +41,146 @@
             position: absolute;
             bottom: 0;
             width: 100%;
-            height: 30vh;
+            height: 35vh;
             background: linear-gradient(to bottom, #95a5a6, #7f8c8d);
             border-top: 6px solid #546e7a;
-            z-index: 5;
+            z-index: 4; /* ورا الأشخاص */
         }
 
-        /* --- حاوية العائلة --- */
+        /* --- حاوية العائلة (تظبيط المسافات) --- */
         .family-container {
             position: absolute;
-            bottom: -350px; /* مخفيين تحت */
+            bottom: 0; /* واقفين على الأرض من الأول */
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             align-items: flex-end;
-            gap: 15px; /* مسافة بين الأشخاص */
-            z-index: 6;
-            transition: bottom 1s ease-out;
-            width: 100%;
-            justify-content: center;
+            gap: 10px;
+            z-index: 10;
+            width: auto;
         }
 
-        /* --- ستايل الشخصيات العام --- */
-        .person {
+        /* --- نظام الشخص مع السلم الخاص به --- */
+        .char-group {
             position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 60px;
-            transition: transform 2s ease-in-out 1s; /* حركة الصعود */
-        }
-
-        .body-shape {
-            width: 50px;
-            height: 80px;
-            border-radius: 20px 20px 0 0;
-            position: relative;
-        }
-
-        .head-shape {
-            width: 35px;
-            height: 35px;
-            background: #ffccbc; /* لون البشرة */
-            border-radius: 50%;
-            position: absolute;
-            top: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 2;
-        }
-
-        .name-tag {
-            background: rgba(0,0,0,0.6);
-            color: #fff;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 0.7rem;
-            margin-top: 5px;
-            white-space: nowrap;
-        }
-
-        /* --- تفاصيل بابا (الثابت) --- */
-        .person.dad {
-            width: 80px;
-            z-index: 10; /* هو قدام أو ورا حسب الرغبة، خليه واضح */
-            margin: 0 10px;
-        }
-        .person.dad .body-shape {
             width: 70px;
-            height: 110px;
-            background: #2980b9; /* جاكيت أزرق */
-        }
-        /* الكاب */
-        .person.dad .head-shape::after {
-            content: '';
-            position: absolute;
-            top: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 15px;
-            background: #2c3e50;
-            border-radius: 10px 10px 0 0;
-        }
-        .person.dad .head-shape::before {
-            content: '';
-            position: absolute;
-            top: 5px;
-            left: -5px;
-            width: 50px;
-            height: 8px;
-            background: #2c3e50;
-            border-radius: 5px;
         }
 
-        /* --- تفاصيل سارة (كيرلي) --- */
-        .person.sara .body-shape { background: #e67e22; }
-        .person.sara .head-shape::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -5px;
-            border-radius: 50%;
-            border: 5px solid #5d4037; /* شعر بني */
-            border-bottom: none;
-            box-shadow: 0 -5px 0 #5d4037;
-        }
-
-        /* --- تفاصيل ماما (طرحة) --- */
-        .person.mama .body-shape { background: #8e44ad; height: 85px; } /* عباية موف */
-        .person.mama .head-shape { background: #ecf0f1; } /* طرحة بيضاء */
-        .person.mama .head-shape::after {
-            content: '';
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            width: 25px;
-            height: 25px;
-            background: #ffccbc; /* الوجه */
-            border-radius: 50%;
-        }
-
-        /* --- تفاصيل بسام (ولد) --- */
-        .person.bassam .body-shape { background: #16a085; } /* تيشيرت أخضر */
-        .person.bassam .head-shape { background: #ffccbc; }
-        .person.bassam .head-shape::after {
-            content: '';
-            position: absolute;
-            top: -5px;
-            width: 100%;
-            height: 15px;
-            background: #2c3e50; /* شعر أسود */
-            border-radius: 20px 20px 0 0;
-        }
-
-        /* --- السلالم --- */
-        .ladders-group {
+        /* السلم (مخفي طوله صفر في البداية) */
+        .ladder {
             position: absolute;
             bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            gap: 15px;
-            z-index: 5;
-        }
-
-        .ladder {
-            width: 40px;
-            height: 0; /* هتكبر */
+            width: 30px;
+            height: 0; /* هيبدأ صفر */
             background: repeating-linear-gradient(
                 to bottom,
                 transparent,
                 transparent 15px,
-                #a1887f 15px,
-                #a1887f 20px
+                #8d6e63 15px,
+                #8d6e63 20px
             );
-            border-left: 4px solid #795548;
-            border-right: 4px solid #795548;
-            transition: height 1s ease 0.5s;
+            border-left: 4px solid #5d4037;
+            border-right: 4px solid #5d4037;
+            transition: height 1s ease;
+            z-index: 5; /* ورا الشخصية */
+        }
+
+        /* الشخصية نفسها */
+        .person {
             position: relative;
+            z-index: 10; /* قدام السلم */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 2s ease-in-out 1s; /* أنيميشن الصعود */
+        }
+
+        /* --- تفاصيل رسم الشخصيات --- */
+        .body-shape {
+            width: 45px;
+            height: 70px;
+            border-radius: 15px 15px 0 0;
         }
         
-        /* ضبط أماكن السلالم عشان تيجي ورا الأشخاص */
-        .ladder.left { margin-right: 80px; } /* مكان ماما */
-        .ladder.right { margin-left: 80px; } /* مكان سارة وبسام */
-        .ladder.center { position: absolute; left: 50%; transform: translateX(80px); } /* مكان بسام */
+        .head-shape {
+            width: 32px;
+            height: 32px;
+            background: #ffccbc;
+            border-radius: 50%;
+            margin-bottom: -5px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .name-tag {
+            background: rgba(0,0,0,0.7);
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 0.65rem;
+            margin-top: 5px;
+            position: absolute;
+            bottom: 5px;
+            color: #fff;
+        }
+
+        /* --- تخصيص ماما --- */
+        .mama .body-shape { background: #8e44ad; height: 75px; }
+        .mama .head-shape { background: #ecf0f1; border-radius: 50%; } /* طرحة */
+        .mama .head-shape::after { /* الوش */
+            content: ''; position: absolute; top: 4px; left: 4px; 
+            width: 24px; height: 24px; background: #ffccbc; border-radius: 50%;
+        }
+
+        /* --- تخصيص بسام (تعديل الشعر) --- */
+        .bassam .body-shape { background: #16a085; }
+        .bassam .head-shape { overflow: hidden; } /* عشان الشعر ميطلعش بره الراس */
+        .bassam .head-shape::before { /* الشعر */
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 10px;
+            background: #2c3e50; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;
+        }
+
+        /* --- تخصيص سارة (كيرلي) --- */
+        .sara .body-shape { background: #e67e22; }
+        .sara .head-shape::before { /* الشعر الكيرلي */
+            content: ''; position: absolute; top: -8px; left: -8px; right: -8px; bottom: 0;
+            border-radius: 50%; border: 4px solid #5d4037; border-bottom: none;
+            z-index: -1;
+        }
+
+        /* --- تخصيص بابا (العمود الثابت) --- */
+        .dad-group { width: 90px; z-index: 20; } /* بابا أكبر وفي النص */
+        .dad .body-shape { width: 65px; height: 100px; background: #2980b9; }
+        .dad .head-shape { width: 40px; height: 40px; }
+        /* الكاب */
+        .dad .head-shape::after {
+            content: ''; position: absolute; top: -5px; left: 50%; transform: translateX(-50%);
+            width: 45px; height: 15px; background: #34495e; border-radius: 10px 10px 0 0;
+        }
+        .dad .head-shape::before {
+            content: ''; position: absolute; top: 8px; left: -5px; width: 50px; height: 8px;
+            background: #34495e; border-radius: 5px;
+        }
 
         /* --- الزرار --- */
         .controls {
             position: absolute;
             top: 40%;
-            z-index: 20;
-            width: 90%;
+            z-index: 30;
+            width: 100%;
         }
 
         .btn {
-            background: linear-gradient(to bottom, #e74c3c, #c0392b);
+            background: linear-gradient(to bottom, #c0392b, #a93226);
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 12px 30px;
             border-radius: 50px;
-            font-size: 0.95rem;
-            font-weight: bold;
+            font-size: 1rem;
             cursor: pointer;
-            box-shadow: 0 0 20px rgba(231, 76, 60, 0.5);
+            box-shadow: 0 0 20px rgba(192, 57, 43, 0.5);
             animation: pulse 2s infinite;
             font-family: inherit;
         }
@@ -246,14 +196,14 @@
             padding: 20px;
             border-radius: 20px;
             width: 90%;
-            max-width: 350px;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+            max-width: 380px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
             transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 30;
+            z-index: 50;
             border: 2px solid #27ae60;
         }
 
-        .god-praise { color: #27ae60; font-weight: bold; display: block; margin-bottom: 10px; }
+        .god-praise { color: #27ae60; font-weight: bold; display: block; margin-bottom: 15px; font-size: 1.1rem; }
         .highlight { color: #27ae60; font-weight: bold; }
 
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
@@ -264,33 +214,43 @@
     <div class="sun"></div>
     <div class="wall"></div>
 
-    <div class="ladders-group">
-        <div class="ladder" id="ladder-mama"></div> <div class="ladder" id="ladder-bassam"></div> <div class="ladder" id="ladder-sara"></div> </div>
-
-    <div class="family-container" id="family">
-        <div class="person mama" id="mama">
-            <div class="head-shape"></div>
-            <div class="body-shape"></div>
-            <div class="name-tag">ماما</div>
+    <div class="family-container">
+        
+        <div class="char-group">
+            <div class="ladder" id="ladder-mama"></div>
+            <div class="person mama" id="mama">
+                <div class="head-shape"></div>
+                <div class="body-shape"></div>
+                <div class="name-tag">ماما</div>
+            </div>
         </div>
 
-        <div class="person dad">
-            <div class="head-shape"></div>
-            <div class="body-shape"></div>
-            <div class="name-tag">بابا</div>
+        <div class="char-group dad-group">
+            <div class="person dad">
+                <div class="head-shape"></div>
+                <div class="body-shape"></div>
+                <div class="name-tag">بابا</div>
+            </div>
         </div>
 
-        <div class="person bassam" id="bassam">
-            <div class="head-shape"></div>
-            <div class="body-shape"></div>
-            <div class="name-tag">بسام</div>
+        <div class="char-group">
+            <div class="ladder" id="ladder-bassam"></div>
+            <div class="person bassam" id="bassam">
+                <div class="head-shape"></div>
+                <div class="body-shape"></div>
+                <div class="name-tag">بسام</div>
+            </div>
         </div>
 
-        <div class="person sara" id="sara">
-            <div class="head-shape"></div>
-            <div class="body-shape"></div>
-            <div class="name-tag">سارة</div>
+        <div class="char-group">
+            <div class="ladder" id="ladder-sara"></div>
+            <div class="person sara" id="sara">
+                <div class="head-shape"></div>
+                <div class="body-shape"></div>
+                <div class="name-tag">سارة</div>
+            </div>
         </div>
+
     </div>
 
     <div class="controls" id="controls">
@@ -300,11 +260,11 @@
     <div class="message-card" id="msg">
         <span class="god-praise">الحمد لله دايماً على نعمة وجودك ❤️</span>
         <p>
-            إحنا ساعات بنخاف من بكرة.. بس بنرجع نطمن ونقوى لما بنفتكر إنك <span class="highlight">في ضهرنا</span>.
+            المستقبل ساعات بيخوف عشان مجهول.. بس إحنا بنرجع نطمن ونقوى لما بنفتكر إنك <span class="highlight">في ضهرنا</span>.
             <br><br>
-            كل واحد فينا بيطلع وبينجح على السلم اللي أنت باني درجاته بـ <span class="highlight">كفاحك وقوتك</span>.
+            كل واحد فينا بيطلع وبينجح على السلم اللي أنت باني درجاته بـ <span class="highlight">تاريخك، كفاحك، سيرتك، قوتك، ودعواتك</span>.
             <br>
-            <small style="color:#7f8c8d; margin-top:10px; display:block;">يا بختنا بيك يا سند البيت</small>
+            <small style="color:#7f8c8d; margin-top:15px; display:block;">ربنا يخليك لينا ويديمك السند والأصل</small>
         </p>
     </div>
 
@@ -313,33 +273,28 @@
             // 1. إخفاء الزر
             document.getElementById('controls').style.display = 'none';
 
-            // 2. ظهور العائلة
-            document.getElementById('family').style.bottom = '0';
+            // 2. ظهور السلالم (تطلع من الأرض ورا كل شخصية)
+            document.getElementById('ladder-mama').style.height = '180px';
+            document.getElementById('ladder-bassam').style.height = '200px';
+            document.getElementById('ladder-sara').style.height = '220px';
 
-            // 3. ظهور السلالم (تطول لفوق)
+            // 3. صعود الشخصيات على السلم
             setTimeout(() => {
-                document.getElementById('ladder-mama').style.height = '180px';
-                document.getElementById('ladder-bassam').style.height = '200px';
-                document.getElementById('ladder-sara').style.height = '220px';
-            }, 800);
+                document.getElementById('mama').style.transform = 'translateY(-130px)';
+                document.getElementById('bassam').style.transform = 'translateY(-150px)';
+                document.getElementById('sara').style.transform = 'translateY(-170px)';
+            }, 1000);
 
-            // 4. صعود العائلة (ماعدا بابا يفضل ثابت يسند)
-            setTimeout(() => {
-                document.getElementById('mama').style.transform = 'translateY(-120px)';
-                document.getElementById('bassam').style.transform = 'translateY(-140px)';
-                document.getElementById('sara').style.transform = 'translateY(-160px)';
-            }, 1800);
-
-            // 5. النور
+            // 4. النور والشمس
             setTimeout(() => {
                 document.body.style.backgroundColor = '#81d4fa'; 
                 document.querySelector('.sun').style.opacity = '1';
-            }, 2500);
+            }, 2000);
 
-            // 6. الرسالة
+            // 5. الرسالة النهائية
             setTimeout(() => {
                 document.getElementById('msg').style.transform = 'translate(-50%, -50%) scale(1)';
-            }, 3200);
+            }, 2800);
         }
     </script>
 
