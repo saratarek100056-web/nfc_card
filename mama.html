@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إلى أمي الحبيبة ❤️</title>
+    <title>ماما حبيبتي ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            /* خلفية بتدرج ألوان الغروب الهادي اللي بتحبيه */
-            background: linear-gradient(135deg, #fff1eb 0%, #ace0f9 100%);
-            font-family: 'Cairo', sans-serif; /* خط عربي شيك */
+            /* خلفية خضراء هادية تليق بلون عيونها */
+            background: linear-gradient(135deg, #e8f5e9 0%, #a5d6a7 100%);
+            font-family: 'Cairo', sans-serif;
             height: 100vh;
             margin: 0;
             display: flex;
@@ -22,87 +22,112 @@
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             padding: 25px;
             border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,128,0,0.15); /* ظل خفيف أخضر */
             width: 85%;
             max-width: 400px;
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.8);
         }
 
         h1 {
-            color: #ff6b81;
+            color: #2e7d32; /* أخضر غامق شيك للعناوين */
             margin-bottom: 5px;
             font-size: 1.6rem;
         }
 
         .subtitle {
             font-size: 0.9rem;
-            color: #777;
-            margin-bottom: 20px;
+            color: #66bb6a; /* أخضر فاتح شوية */
+            margin-bottom: 15px;
         }
 
         /* تنسيق صندوق الرسالة */
         #message-box {
             font-size: 1.1rem;
-            min-height: 100px; /* مساحة كافية للكلام */
+            min-height: 90px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #2f3542;
-            margin: 10px 0 20px;
-            line-height: 1.6;
+            color: #1b5e20; /* أخضر زيتي للكلام */
+            margin: 10px 0 15px; /* قللت المسافات هنا */
+            line-height: 1.5;
             font-weight: bold;
             padding: 10px;
-            background-color: #f8f9fa;
+            background-color: #f1f8e9; /* خلفية فاتحة جداً للبوكس */
             border-radius: 15px;
-            border-right: 5px solid #ff6b81; /* لمسة جمالية */
+            border-right: 5px solid #2e7d32; /* خط جمالي أخضر */
         }
 
-        /* القلب النابض */
+        /* إصلاح مشكلة القلب المقصوص */
+        /* الطريقة دي (CSS Shapes) بتضمن إن القلب يطلع كامل */
         .heart-container {
             position: relative;
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
+            width: 60px;
+            height: 60px;
+            margin: 10px auto 20px; /* ظبطت المسافات */
             cursor: pointer;
             transition: transform 0.2s;
         }
-
-        .heart-container:active {
-            transform: scale(0.9); /* تأثير عند الضغط */
-        }
-
+        
         .heart {
-            background-color: #ff4757;
+            background-color: #b71540; /* أحمر غامق (نبيتي) */
             display: inline-block;
-            height: 100%;
-            width: 100%;
+            height: 30px;
+            margin: 0 10px;
             position: relative;
-            clip-path: path('M50 88.9L16.7 55.6C7.2 46.1 7.2 30.9 16.7 21.4s24.7-9.5 33.3 0l0 0 0 0c8.6-9.5 23.8-9.5 33.3 0s9.5 24.7 0 33.3L50 88.9z');
-            animation: pulse 1.5s infinite;
+            top: 0;
+            transform: rotate(-45deg);
+            width: 30px;
+            animation: pulse 1.2s infinite;
         }
 
+        .heart:before,
+        .heart:after {
+            content: "";
+            background-color: #b71540; /* نفس الأحمر الغامق */
+            border-radius: 50%;
+            height: 30px;
+            position: absolute;
+            width: 30px;
+        }
+
+        .heart:before {
+            top: -15px;
+            left: 0;
+        }
+
+        .heart:after {
+            left: 15px;
+            top: 0;
+        }
+
+        /* تنسيق الزرار الجديد (أخضر) */
         .btn {
-            background: linear-gradient(45deg, #ff6b81, #ff4757);
+            background: linear-gradient(45deg, #43a047, #2e7d32); /* تدرج أخضر غني */
             color: white;
             border: none;
             padding: 12px 30px;
             border-radius: 50px;
             font-size: 1.1rem;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.3);
+            box-shadow: 0 5px 15px rgba(46, 125, 50, 0.4);
             font-family: inherit;
             width: 100%;
             font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            transform: scale(1.02);
         }
 
         /* رسالة التأكيد */
         #status {
             margin-top: 15px;
-            color: #2ed573;
+            color: #2e7d32; /* أخضر غامق */
             font-weight: bold;
             font-size: 0.9rem;
             opacity: 0;
@@ -110,9 +135,9 @@
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+            0% { transform: rotate(-45deg) scale(1); }
+            50% { transform: rotate(-45deg) scale(1.2); }
+            100% { transform: rotate(-45deg) scale(1); }
         }
     </style>
 </head>
@@ -149,11 +174,9 @@
 
         // اختيار رسالة عشوائية عند الفتح
         const msgBox = document.getElementById('message-box');
-        // دالة لاختيار رسالة عشوائية
         function showRandomMessage() {
             msgBox.innerText = messages[Math.floor(Math.random() * messages.length)];
         }
-        // تشغيل الدالة أول ما الصفحة تفتح
         showRandomMessage();
 
         // 2. وظيفة إرسال الحضن
@@ -163,8 +186,7 @@
             // إظهار رسالة التأكيد
             status.style.opacity = '1';
             
-            // --- (مكان كود التليجرام هيتحط هنا) ---
-            // sendToTelegram(); 
+            // --- (هنا هنحط كود التليجرام لما تكوني جاهزة) ---
             
             // إخفاء الرسالة بعد 3 ثواني
             setTimeout(() => {
