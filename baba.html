@@ -179,6 +179,8 @@
 </head>
 <body>
 
+    <audio id="voice-message" src="baba.mp3" preload="auto"></audio>
+
     <div class="sun"></div>
     <div class="wall"></div>
 
@@ -236,6 +238,14 @@
 
     <script>
         function startJourney() {
+            // 0. تشغيل الصوت
+            var audio = document.getElementById("voice-message");
+            if (audio) {
+                audio.play().catch(function(error) {
+                    console.log("Audio play failed: ", error);
+                });
+            }
+
             // 1. إخفاء الزر
             document.getElementById('controls').style.display = 'none';
 
