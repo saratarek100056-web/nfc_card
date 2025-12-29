@@ -25,7 +25,7 @@
             background: rgba(255, 255, 255, 0.95);
             padding: 25px;
             border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(0,128,0,0.15); /* ظل خفيف أخضر */
+            box-shadow: 0 10px 30px rgba(0,128,0,0.15);
             width: 85%;
             max-width: 400px;
             position: relative;
@@ -33,14 +33,14 @@
         }
 
         h1 {
-            color: #2e7d32; /* أخضر غامق شيك للعناوين */
+            color: #2e7d32;
             margin-bottom: 5px;
             font-size: 1.6rem;
         }
 
         .subtitle {
             font-size: 0.9rem;
-            color: #66bb6a; /* أخضر فاتح شوية */
+            color: #66bb6a;
             margin-bottom: 15px;
         }
 
@@ -51,23 +51,22 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #1b5e20; /* أخضر زيتي للكلام */
-            margin: 10px 0 15px; /* قللت المسافات هنا */
+            color: #1b5e20;
+            margin: 10px 0 15px;
             line-height: 1.5;
             font-weight: bold;
             padding: 10px;
-            background-color: #f1f8e9; /* خلفية فاتحة جداً للبوكس */
+            background-color: #f1f8e9;
             border-radius: 15px;
-            border-right: 5px solid #2e7d32; /* خط جمالي أخضر */
+            border-right: 5px solid #2e7d32;
         }
 
-        /* إصلاح مشكلة القلب المقصوص */
-        /* الطريقة دي (CSS Shapes) بتضمن إن القلب يطلع كامل */
+        /* القلب الكامل (غير مقصوص) */
         .heart-container {
             position: relative;
             width: 60px;
             height: 60px;
-            margin: 10px auto 20px; /* ظبطت المسافات */
+            margin: 10px auto 20px;
             cursor: pointer;
             transition: transform 0.2s;
         }
@@ -87,7 +86,7 @@
         .heart:before,
         .heart:after {
             content: "";
-            background-color: #b71540; /* نفس الأحمر الغامق */
+            background-color: #b71540;
             border-radius: 50%;
             height: 30px;
             position: absolute;
@@ -106,7 +105,7 @@
 
         /* تنسيق الزرار الجديد (أخضر) */
         .btn {
-            background: linear-gradient(45deg, #43a047, #2e7d32); /* تدرج أخضر غني */
+            background: linear-gradient(45deg, #43a047, #2e7d32);
             color: white;
             border: none;
             padding: 12px 30px;
@@ -127,7 +126,7 @@
         /* رسالة التأكيد */
         #status {
             margin-top: 15px;
-            color: #2e7d32; /* أخضر غامق */
+            color: #2e7d32;
             font-weight: bold;
             font-size: 0.9rem;
             opacity: 0;
@@ -144,7 +143,7 @@
 <body>
 
     <div class="container">
-        <h1>مامتي حبيبتي ❤️</h1>
+        <h1>مامتي قلبي ❤️</h1>
         <div class="subtitle">اضغطي على القلب عشان يوصلني</div>
         
         <div class="heart-container" onclick="sendHug()">
@@ -159,7 +158,7 @@
     </div>
 
     <script>
-        // 1. رسايلك الجميلة (قاعدة البيانات)
+        // 1. قاعدة بيانات الرسائل
         const messages = [
             "عارفة إن الحمل تقيل والشغل مبيخلصش، بس ربنا معاكِ وبيعينك وبيبارك في صحتك. 🤲",
             "معلش.. عارفة إنك تعبانة، بس ربنا شايلك أجر كبير أوي على كل لحظة تعب بتتعبيها عشاننا. ✨",
@@ -179,19 +178,33 @@
         }
         showRandomMessage();
 
-        // 2. وظيفة إرسال الحضن
+        // 2. وظيفة إرسال الحضن عبر تليجرام
         function sendHug() {
             const status = document.getElementById('status');
             
-            // إظهار رسالة التأكيد
-            status.style.opacity = '1';
+            // --- بياناتك (تم دمجها بنجاح) ---
+            const token = "8385520588:AAFow1uAKWVpkeQadgSXvTHZhaXhNq1mtgU"; 
+            const chatId = "786558490"; 
             
-            // --- (هنا هنحط كود التليجرام لما تكوني جاهزة) ---
-            
-            // إخفاء الرسالة بعد 3 ثواني
-            setTimeout(() => {
-                status.style.opacity = '0';
-            }, 3000);
+            // الرسالة اللي هتجيلك
+            const message = "🚨 إشعار حب خاص: ماما بعتتلك حضن دلوقتي! ❤️ اجري كلميها.";
+
+            const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+            fetch(url).then(response => {
+                if (response.ok) {
+                    // نجاح الإرسال
+                    status.style.opacity = '1';
+                    setTimeout(() => {
+                        status.style.opacity = '0';
+                    }, 3000);
+                } else {
+                    console.log("Error sending message");
+                    alert("تأكدي من الاتصال بالإنترنت ❤️");
+                }
+            }).catch(error => {
+                console.error("Error:", error);
+            });
         }
     </script>
 
