@@ -2,22 +2,22 @@ const starsData = [
     {
         title: "لو مضايقة ومخنوقة",
         text: "لو فتحتي النجمة دي وأنتِ مضايقة، أو حاسة بـ خنقة مش عارفة سببها، أو الأيام تقلت عليكي .. عايزاكي تاخدي نَفس طويل وتهوني على نفسك. عادي جداً نضعف وتمر علينا لحظات نكون مش قادرين فيها حتى نتكلم، بس افتكري دايماً إن ربنا جنبك ومعاك... وكل حاجة هتعدي .. كلنا بندعيلك وفي قلبنا على طول ... مينفعش العينين الحلوين دولا يزعلوا ... قومي اعمليلك حاجة تفرحك ... او كلميني انا موجودة على طول عشانك ... روقي يا جميلة، ضيقتك دي غالية علينا.",
-        position: new THREE.Vector3(-2.3, 1.8, -7.5)
+        position: new THREE.Vector3(-2.2, 1.8, -7.5)
     },
     {
         title: "لو خايفة أو حيرانه",
         text: "انا عارفة الحياة صعبة وممكن تدخلنا في متاهات وتفاصيل جديدة بتخلينا نحس بـ حيرة أو خوف من الجاي، ومبنكونش عارفين إحنا ماشيين صح ولا غلط.. في اللحظة دي، اقفلي عينك وسيبك امرك كله لربنا ... ربنا عارف الخير ليك ... هييسره ليك...متخليش القلق يسرق منك هدوءك ولا ضحكتك، وسيبي بكرة لربنا. مهما كانت الخطوة الجاية غامضة، ربنا معاك وانتِ قدها، وافتكري دايماً إن ليكي أخت في ضهرك، سند ليكي في كل الاحتمالات ومن غير ما تسألك عن أي تفاصيل.",
-        position: new THREE.Vector3(2.3, 1.8, -7.5)
+        position: new THREE.Vector3(2.2, 1.8, -7.5)
     },
     {
         title: "أيام زمان وحكاياتنا",
         text: "انا بتوحشني اوي لمتنا زمان، وحكايتنا وسفرنا وضحكنا مع بعض ... وانا عارفة ان المسافات وسفر كل واحد فينا أخدنا في دوامة ومبقناش عارفين تفاصيل بعض زي زمان.. بس ذكرياتنا وإحنا صغيرين، ضحكنا، ولعبنا، وكل ثانية عشناها سوا لسه عايشة جوايا بالثانية ومبتتمحيش. إحنا جذورنا واحدة ومالناش إلا بعض مهما غبنا ..",
-        position: new THREE.Vector3(-2.3, -1.6, -7.5)
+        position: new THREE.Vector3(-2.2, -1.6, -7.5)
     },
     {
         title: "في بالي دايماً",
         text: "احنا مبقناش بنتكلم كتير والدنيا شغلتنا، ومبقتش عارفة أوي إيه اللي بيفرحك أو يزعلك في حياتك الجديدة.. بس إنتي في بالي وفي قلبي دايماً. بحبك جاامد بجد، و كتير بفتكرك وبأدعي لك. ربنا يريح بالك، ويسعد قلبك، ويديكي كل الخير والرضا اللي في الدنيا، وتفضلي دايماً غالية وقريبة زي ما كنتِ وزي ما هتفضلي.. أنتِ حتة مني.",
-        position: new THREE.Vector3(2.3, -1.6, -7.5)
+        position: new THREE.Vector3(2.2, -1.6, -7.5)
     }
 ];
 
@@ -40,61 +40,106 @@ function init() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-    // 🌟 التعديل عشان يقرا امتداد الـ .jpeg بتاع صورتك بالظبط
-    const loader = new THREE.TextureLoader();
-    loader.crossOrigin = "Anonymous"; 
-    loader.load('sunset_stars.jpeg', function(texture) { // تعديل الامتداد هنا
-        texture.mapping = THREE.EquirectangularReflectionMapping;
-        const skyGeo = new THREE.SphereGeometry(500, 60, 40);
-        const skyMat = new THREE.MeshBasicMaterial({ map: texture, side: THREE.BackSide });
-        const sky = new THREE.Mesh(skyGeo, skyMat);
-        scene.add(sky);
-    }, undefined, function(err) {
-        console.error("خطأ في تحميل الصورة");
+    // 🌟 1. خلفية سديم الغروب الساحرة العميقة (Shader) - نقية ومستقرة تماماً
+    const vertexShader = `
+        varying vec3 vNormal;
+        void main() {
+            vNormal = normalize(normalMatrix * normal);
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+    `;
+    const fragmentShader = `
+        varying vec3 vNormal;
+        void main() {
+            float intensity = pow(0.7 - dot(vNormal, vec3(0, 0, 1.0)), 2.0);
+            // مزيج متدرج رائع من الأسود الداكن والبرتقالي الغروبي الدافئ والبنفسجي الليلي
+            vec3 sunsetOrange = vec3(0.95, 0.45, 0.15);
+            vec3 spacePurple = vec3(0.12, 0.05, 0.18);
+            vec3 finalColor = mix(spacePurple, sunsetOrange, intensity);
+            gl_FragColor = vec4(finalColor, 1.0);
+        }
+    `;
+    const skyGeo = new THREE.SphereGeometry(500, 32, 15);
+    const skyMat = new THREE.ShaderMaterial({
+        vertexShader: vertexShader,
+        fragmentShader: fragmentShader,
+        side: THREE.BackSide
     });
+    const sky = new THREE.Mesh(skyGeo, skyMat);
+    scene.add(sky);
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.4); 
+    // 🌟 2. نثر مئات النجوم الصغيرة الحقيقية اللامعة في الخلفية
+    const starsGeometry = new THREE.BufferGeometry();
+    const starsCount = 400;
+    const starPositions = new Float32Array(starsCount * 3);
+    for(let i=0; i<starsCount*3; i+=3) {
+        starPositions[i] = (Math.random() - 0.5) * 150;
+        starPositions[i+1] = (Math.random() - 0.5) * 150;
+        starPositions[i+2] = -Math.random() * 100 - 10;
+    }
+    starsGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+    const starsMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.25, transparent: true });
+    const starField = new THREE.Points(starsGeometry, starsMaterial);
+    scene.add(starField);
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
     scene.add(ambientLight);
 
-    // إنشاء النجوم الكريستالية الـ 3D الجديدة
+    // 🌟 3. إنشاء قلوب 3D منورة (3D Hearts) بدقة هندسية عالية وبحجم مناسب
     starsData.forEach((data, index) => {
         const starGroup = new THREE.Group();
         starGroup.position.copy(data.position);
 
-        // 🌟 التعديل: شكل النجمة الـ 3D (OctahedronGeometry) بدل الدائرة السادة
-        const starGeo = new THREE.OctahedronGeometry(0.45, 0); 
-        const starMat = new THREE.MeshBasicMaterial({ 
-            color: 0xffe28a, // لون ذهبي ماسي منور واقوى
-            wireframe: false
-        });
-        const starMesh = new THREE.Mesh(starGeo, starMat);
-        starGroup.add(starMesh);
+        // رسم مسار شكل قلب هندسي متناسق
+        const x = 0, y = 0;
+        const heartShape = new THREE.Shape();
+        heartShape.moveTo(x + 0.25, y + 0.25);
+        heartShape.bezierCurveTo(x + 0.25, y + 0.25, x + 0.2, y, x, y);
+        heartShape.bezierCurveTo(x - 0.3, y, x - 0.3, y + 0.35, x - 0.3, y + 0.35);
+        heartShape.bezierCurveTo(x - 0.3, y + 0.55, x - 0.1, y + 0.77, x + 0.25, y + 0.95);
+        heartShape.bezierCurveTo(x + 0.6, y + 0.77, x + 0.8, y + 0.55, x + 0.8, y + 0.35);
+        heartShape.bezierCurveTo(x + 0.8, y + 0.35, x + 0.8, y, x + 0.5, y);
+        heartShape.bezierCurveTo(x + 0.35, y, x + 0.25, y + 0.25, x + 0.25, y + 0.25);
 
-        // كتابة العناوين الفوقية بخط Cairo وتكبيرها
+        // تحويل مسار القلب لمجسم ثلاثي الأبعاد (Extrude)
+        const extrudeSettings = { depth: 0.15, bevelEnabled: true, bevelSegments: 3, steps: 1, bevelSize: 0.05, bevelThickness: 0.05 };
+        const heartGeo = new THREE.ExtrudeGeometry(heartShape, extrudeSettings);
+        heartGeo.center(); // وضع السنتر في منتصف القلب بالظبط
+        
+        const heartMat = new THREE.MeshBasicMaterial({ 
+            color: 0xffdf7a, // لون ذهبي دافئ وساطع
+            transparent: true,
+            opacity: 0.95
+        });
+        const heartMesh = new THREE.Mesh(heartGeo, heartMat);
+        heartMesh.scale.set(1.2, 1.2, 1.2); // تظبيط مقياس القلب
+        starGroup.add(heartMesh);
+
+        // 🌟 4. تكبير خط العناوين الفوقية بشكل ملحوظ ورفعها للأعلى عشان تفصل تماماً عن القلب
         const textCanvas = document.createElement('canvas');
-        textCanvas.width = 300; // وسعنا الـ Canvas للخط الكبير
-        textCanvas.height = 80;
+        textCanvas.width = 400; 
+        textCanvas.height = 100;
         const ctx = textCanvas.getContext('2d');
-        ctx.font = 'Bold 24px Cairo'; // تطبيق الخط الجديد هنا أيضاً
+        ctx.font = 'Bold 30px Cairo'; // كبرنا الفونت اوي هنا
         ctx.fillStyle = '#ffffff';
         ctx.textAlign = 'center';
-        ctx.shadowColor = '#ffd700';
-        ctx.shadowBlur = 12;
-        ctx.fillText(data.title, 150, 45);
+        ctx.shadowColor = '#ffdf7a';
+        ctx.shadowBlur = 14;
+        ctx.fillText(data.title, 200, 60);
 
         const textTexture = new THREE.CanvasTexture(textCanvas);
         const spriteMat = new THREE.SpriteMaterial({ map: textTexture, transparent: true });
         const sprite = new THREE.Sprite(spriteMat);
-        sprite.position.y = 0.9; 
-        sprite.scale.set(2.4, 0.6, 1);
+        sprite.position.y = 1.1; // رفعنا العنوان فوق عشان ميتداخلش مع القلب
+        sprite.scale.set(2.8, 0.7, 1);
         starGroup.add(sprite);
 
-        starGroup.userData = { id: index, starMesh: starMesh };
+        starGroup.userData = { id: index, starMesh: heartMesh };
         scene.add(starGroup);
         starObjects.push(starGroup);
     });
 
-    // تفعيل المستشعرات والحركة
+    // مستشعرات الحركة والـ Gyroscope
     if (window.DeviceOrientationEvent) {
         if (typeof DeviceOrientationEvent.requestPermission === 'function') {
             window.addEventListener('click', () => {
@@ -120,7 +165,7 @@ function init() {
 function handleOrientation(event) {
     if (event.gamma && event.beta) {
         targetRotationY = (event.gamma / 45) * 0.4;
-        targetRotationX = ((event.beta - 65) / 45) * 0.4;
+        targetRotationX = ((event.beta - 60) / 45) * 0.4;
     }
 }
 
@@ -161,14 +206,12 @@ function onSelectStarTouch(event) {
 
 function animate(time) {
     requestAnimationFrame(animate);
-    if (typeof TWEEN !== 'undefined') TWEEN.update();
 
-    // يجعل النجوم تنبض وتلف ببطء حول نفسها كأنها جواهر حقيقية بتلمع ✨
-    const pulse = 1 + Math.sin(time * 0.003) * 0.06;
+    // نبض القلوب ودورانها الرقيق جداً حول نفسها الفنية ✨
+    const pulse = 1 + Math.sin(time * 0.003) * 0.05;
     starObjects.forEach(starGroup => {
-        starGroup.userData.starMesh.scale.set(pulse, pulse, pulse);
-        starGroup.userData.starMesh.rotation.y += 0.01; // دوران النجمة
-        starGroup.userData.starMesh.rotation.x += 0.005;
+        starGroup.userData.starMesh.scale.set(pulse * 1.2, pulse * 1.2, pulse * 1.2);
+        starGroup.userData.starMesh.rotation.y = Math.sin(time * 0.001) * 0.2; // لف خفيف يمين وشمال ناعم
     });
 
     camera.rotation.y += (targetRotationY - camera.rotation.y) * 0.05;
