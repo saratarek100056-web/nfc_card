@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صندوق الأمان الدافئ</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- مكتبات الـ 3D والأنيميشن المعتمدة -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js"></script>
+</head>
+<body>
+
+    <!-- الـ Canvas الخاص بـ Three.js للمشهد ثلاثي الأبعاد -->
+    <canvas id="sunset-canvas"></canvas>
+
+    <!-- واجهة المستخدم الفوقية المستقرة (UI Overlay) -->
+    <div id="ui-container">
+        <h1 class="main-title">صندوق الأمان.. لقلبكِ أنتِ وبس</h1>
+        <p class="hint-text">حركي موبايلكِ لتتأملي السماء، والمسي النجوم</p>
+    </div>
+
+    <!-- الـ Modal الشفاف المشترك لعرض الرسائل الـ 4 -->
+    <div id="message-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div id="modal-text" class="modal-text-body"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
