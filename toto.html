@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ملاذ الروح والونس</title>
-    <!-- استدعاء خط Cairo المودرن والناعم -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -377,7 +376,6 @@
         </div>
 
         <div class="doses-list">
-            <!-- الكارت 1 -->
             <div class="dose-card" onclick="openDose(0)">
                 <div class="dose-icon">🤍</div>
                 <div class="dose-info">
@@ -386,7 +384,6 @@
                 </div>
             </div>
 
-            <!-- الكارت 2 -->
             <div class="dose-card" onclick="openDose(1)">
                 <div class="dose-icon">⚓</div>
                 <div class="dose-info">
@@ -395,7 +392,6 @@
                 </div>
             </div>
 
-            <!-- الكارت 3 -->
             <div class="dose-card" onclick="openDose(2)">
                 <div class="dose-icon">⏳</div>
                 <div class="dose-info">
@@ -404,7 +400,6 @@
                 </div>
             </div>
 
-            <!-- الكارت 4 -->
             <div class="dose-card" onclick="openDose(3)">
                 <div class="dose-icon">✨</div>
                 <div class="dose-info">
@@ -415,17 +410,14 @@
         </div>
     </div>
 
-    <!-- الـ Modal الرئيسي المشترك لعرض المحتوى والتفاعلات -->
     <div id="dose-modal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-btn" id="modal-close-x" onclick="closeDose()">&times;</span>
             <h2 id="modal-title" class="modal-dose-title"></h2>
             <div id="modal-text" class="modal-text-body"></div>
             
-            <!-- المنطقة التفاعلية المتغيرة حسب كل حالة -->
             <div id="dynamic-interaction-zone" class="interactive-zone"></div>
             
-            <!-- 🌟 مشغل الصوت السري المستقبلي جاهز تماماً وباسم "جرعة طاقة زيادة" ومخفي حالياً -->
             <div id="audio-container" class="audio-player-wrapper" style="display: none;">
                 <p class="audio-hint">⚡ جرعة طاقة زيادة (صوت العيلة لقلبكِ): </p>
                 <audio id="dose-audio" controls></audio>
@@ -433,9 +425,6 @@
         </div>
     </div>
 
-    /* ==========================================================================
-       4. هندسة المنطق والمشاكسة التفاعلية (JavaScript)
-       ========================================================================== */
     <script>
         const dosesData = [
             {
@@ -548,111 +537,11 @@
         function forceUnlockDose() {
             canCloseModal = true;
             closeDose();
-            alert("أيوا كدة! اضحكي وقومي دلعي نفسك يا جميلة 🤍");
-        }
-
-        // منطق شحن الطاقة المطول لـ 3 ثواني
-        let chargeTimer;
-        let chargePercent = 0;
-        function startCharging(e) {
-            e.preventDefault();
-            document.getElementById('p-container').style.display = "block";
-            const bar = document.getElementById('p-bar');
-            const status = document.getElementById('c-status');
-            const btn = document.getElementById('hold-charge-btn');
-
-            chargeTimer = setInterval(() => {
-                if (chargePercent < 100) {
-                    chargePercent += 4;
-                    bar.style.width = chargePercent + "%";
-                    status.innerText = `جاري الشحن: ${chargePercent}%`;
-                    btn.style.background = `rgba(255,224,125, ${chargePercent/100})`;
-                } else {
-                    clearInterval(chargeTimer);
-                    status.innerHTML = "✨ <b>تم الشحن بنجاح 100%! ربنا جبنبك ومعاكِ وإنت قدها!</b> ✨";
-                    btn.innerText = "💪";
-                }
-            }, 100);
-        }
-
-        function stopCharging() {
-            clearInterval(chargeTimer);
-            if (chargePercent < 100) {
-                chargePercent = 0;
-                document.getElementById('p-bar').style.width = "0%";
-                document.getElementById('c-status').innerText = "انقطع الاتصال.. المسي الضغطة تانى من الأول وشدي الحيل";
-                document.getElementById('hold-charge-btn').style.background = "rgba(255,224,125, 0.1)";
-            }
-        }
-
-        // منطق تطيير قلوب الحضن الرقمي العابر للقارات
-        function triggerDigitalHug(e) {
-            const clientX = e.clientX || (e.touches && e.touches[0].clientX) || window.innerWidth/2;
-            const clientY = e.clientY || (e.touches && e.touches[0].clientY) || window.innerHeight/2;
-
-            for(let i=0; i<12; i++) {
-                const heart = document.createElement('div');
-                heart.className = 'floating-heart';
-                heart.innerText = i % 2 === 0 ? '🤍' : '💛';
-                heart.style.left = (clientX + (Math.random() * 60 - 30)) + 'px';
-                heart.style.top = (clientY + (Math.random() * 60 - 30)) + 'px';
-                heart.style.animationDelay = (Math.random() * 0.3) + 's';
-                document.body.appendChild(heart);
-                
-                setTimeout(() => { heart.remove(); }, 1500);
-            }
-        }
-
-        // منطق قشط الشاشة والـ Scratch Canvas
-        function initScratchEffect() {
-            const canvas = document.getElementById('canvas-scratch');
-            if(!canvas) return;
-            const ctx = canvas.getContext('2d');
-            canvas.width = canvas.parentElement.offsetWidth;
-            canvas.height = canvas.parentElement.offsetHeight;
-
-            // دهان الطبقة العلوية باللون البنفسجي المغبش الشيك
-            ctx.fillStyle = '#4a3564';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // كتابة كلمة إرشادية فوقها
-            ctx.font = '16px Cairo';
-            ctx.fillStyle = '#bfaecf';
-            ctx.textAlign = 'center';
-            ctx.fillText('اقشطي بصباعكِ هنا.. 🤍', canvas.width/2, canvas.height/2 + 5);
-
-            let isDrawing = false;
-            function scratch(x, y) {
-                ctx.globalCompositeOperation = 'destination-out'; // يمسح اللي تحته
-                ctx.beginPath();
-                ctx.arc(x, y, 20, 0, Math.PI * 2);
-                ctx.fill();
-            }
-
-            canvas.addEventListener('mousedown', (e) => { isDrawing = true; scratch(e.offsetX, e.offsetY); });
-            canvas.addEventListener('mousemove', (e) => { if(isDrawing) scratch(e.offsetX, e.offsetY); });
-            window.addEventListener('mouseup', () => isDrawing = false);
-
-            canvas.addEventListener('touchstart', (e) => {
-                isDrawing = true;
-                const rect = canvas.getBoundingClientRect();
-                scratch(e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top);
-            });
-            canvas.addEventListener('touchmove', (e) => {
-                if(!isDrawing) return;
-                const rect = canvas.getBoundingClientRect();
-                scratch(e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top);
-            });
-            window.addEventListener('touchend', () => isDrawing = false);
         }
 
         function closeDose() {
-            if (!canCloseModal) {
-                alert("تؤ تؤ.. مفيش قفل ولا هروب! لازم توافقي وتقومي تعملي حاجة تفرحكِ الأول! 😜");
-                return;
-            }
+            if (!canCloseModal) return;
             document.getElementById('dose-modal').classList.remove('active');
-            document.getElementById('dose-audio').pause();
         }
     </script>
 </body>
