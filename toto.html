@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ملاذ الروح والونس</title>
+    <!-- استدعاء خط Cairo المودرن والناعم -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -21,7 +22,6 @@
         }
 
         body {
-            /* خلفية بتدرج بنفسجي ليلى ساحر وعميق جداً مريح للعين */
             background: linear-gradient(135deg, #0d0614 0%, #1a0b2e 50%, #0d0614 100%);
             color: #ffffff;
             min-height: 100vh;
@@ -47,7 +47,7 @@
         .main-title {
             font-size: 1.55rem;
             font-weight: 900;
-            color: #ffe07d; /* أصفر دهبي منور */
+            color: #ffe07d; 
             line-height: 1.5;
             margin-bottom: 8px;
             text-shadow: 0 4px 15px rgba(255, 224, 125, 0.3);
@@ -55,11 +55,10 @@
 
         .hint-text {
             font-size: 0.95rem;
-            color: #d2c4e3; /* بنفسجي فاتح ناعم */
+            color: #d2c4e3; 
             font-weight: 600;
         }
 
-        /* كروت الأبواب الأربعة الفوقية */
         .doses-list {
             display: flex;
             flex-direction: column;
@@ -113,7 +112,6 @@
             color: #bfaecf;
         }
 
-        /* الـ Modal الشفاف المصمم بـ Glassmorphism راقي جداً */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -192,9 +190,9 @@
             padding-top: 18px;
             border-top: 1px dashed rgba(255, 224, 125, 0.15);
             text-align: center;
+            min-height: 80px;
         }
 
-        /* أزرار المشاكسة للحالة الأولى (مخنوقة) */
         .game-title {
             font-size: 0.95rem;
             color: #ffe07d;
@@ -218,23 +216,39 @@
             border-radius: 12px;
             border: none;
             cursor: pointer;
-            transition: transform 0.1s, background 0.2s;
+            transition: background 0.2s;
         }
 
         .btn-yes {
             background: #ffe07d;
             color: #1a0b2e;
+            z-index: 10;
         }
 
         .btn-no {
             background: rgba(255, 255, 255, 0.1);
             color: #ffffff;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            position: absolute; /* ضروري للهرب السلس */
-            transition: all 0.2s ease;
+            position: absolute; 
+            transition: all 0.15s ease-out;
+            z-index: 10;
         }
 
-        /* حالة الشحن للحالة الثانية (حيرانة) */
+        /* رسالة النجاح الداخلية جوة الوقع */
+        .success-inline-msg {
+            color: #ffe07d;
+            font-size: 1.1rem;
+            font-weight: 700;
+            animation: pulseText 1.5s infinite;
+            margin-top: 10px;
+        }
+
+        @keyframes pulseText {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; text-shadow: 0 0 10px rgba(255,224,125,0.4); }
+            100% { opacity: 0.8; }
+        }
+
         .charge-box {
             background: rgba(255, 255, 255, 0.03);
             border-radius: 16px;
@@ -278,7 +292,6 @@
             height: 100%;
             background: #ffe07d;
             box-shadow: 0 0 10px #ffe07d;
-            transition: width 0.1s linear;
         }
 
         .charge-status {
@@ -287,7 +300,6 @@
             margin-top: 8px;
         }
 
-        /* أنيميشن القلوب الطائرة للحالة الثالثة (أيام زمان) */
         .hug-btn {
             background: rgba(255, 224, 125, 0.15);
             color: #ffe07d;
@@ -298,7 +310,7 @@
 
         .floating-heart {
             position: fixed;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             pointer-events: none;
             z-index: 200;
             animation: floatUp 1.2s ease-out forwards;
@@ -306,15 +318,14 @@
 
         @keyframes floatUp {
             0% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-150px) scale(1.4) rotate(20deg); opacity: 0; }
+            100% { transform: translateY(-160px) scale(1.5) rotate(25deg); opacity: 0; }
         }
 
-        /* طبقة القشط للحالة الرابعة (في بالي) */
         .scratch-container {
             position: relative;
             width: 100%;
-            max-width: 320px;
-            height: 100px;
+            max-width: 340px;
+            height: 110px;
             margin: 10px auto;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 14px;
@@ -323,6 +334,7 @@
             align-items: center;
             justify-content: center;
             user-select: none;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .scratch-canvas {
@@ -333,20 +345,19 @@
             height: 100%;
             cursor: pointer;
             z-index: 5;
+            touch-action: none; /* يمنع الموبايل من سحب الشاشة أثناء الخربشة */
         }
 
         .secret-message {
             font-size: 1.05rem;
             font-weight: 700;
             color: #ffe07d;
-            padding: 10px;
+            padding: 15px;
             z-index: 1;
-            text-shadow: 0 2px 10px rgba(255,224,125,0.2);
+            text-align: center;
+            line-height: 1.6;
         }
 
-        /* ==========================================================================
-           3. مشغل الصوت السري المستقبلي "جرعة طاقة زيادة"
-           ========================================================================== */
         .audio-player-wrapper {
             margin-top: 20px;
             padding-top: 15px;
@@ -371,11 +382,12 @@
 
     <div class="app-container">
         <div class="header-section">
-            <h1 class="main-title"> لقلبكِ أنتِ وبس ✨</h1>
+            <h1 class="main-title">لقلبكِ أنتِ وبس ✨</h1>
             <p class="hint-text">اختارِ الباب اللي محتاجه قلبكِ دلوقتي ..</p>
         </div>
 
         <div class="doses-list">
+            <!-- الكارت 1 -->
             <div class="dose-card" onclick="openDose(0)">
                 <div class="dose-icon">🤍</div>
                 <div class="dose-info">
@@ -384,6 +396,7 @@
                 </div>
             </div>
 
+            <!-- الكارت 2 -->
             <div class="dose-card" onclick="openDose(1)">
                 <div class="dose-icon">⚓</div>
                 <div class="dose-info">
@@ -392,6 +405,7 @@
                 </div>
             </div>
 
+            <!-- الكارت 3 -->
             <div class="dose-card" onclick="openDose(2)">
                 <div class="dose-icon">⏳</div>
                 <div class="dose-info">
@@ -400,6 +414,7 @@
                 </div>
             </div>
 
+            <!-- الكارت 4 -->
             <div class="dose-card" onclick="openDose(3)">
                 <div class="dose-icon">✨</div>
                 <div class="dose-info">
@@ -410,6 +425,7 @@
         </div>
     </div>
 
+    <!-- الـ Modal الرئيسي -->
     <div id="dose-modal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-btn" id="modal-close-x" onclick="closeDose()">&times;</span>
@@ -425,12 +441,15 @@
         </div>
     </div>
 
+    <!-- ==========================================================================
+       4. هندسة المنطق والمشاكسة التفاعلية (JavaScript المتكامل والمصلح)
+       ========================================================================== -->
     <script>
         const dosesData = [
             {
                 title: "تعالي روقي هنا..",
                 text: "لو فتحتي الباب ده وأنتِ مضايقة، أو حاسة بـ خنقة مش عارفة سببها، أو الأيام تقلت عليكي .. عايزاكي تاخدي نَفس طويل وتهوني على نفسك. عادي جداً نضعف وتمر علينا لحظات نكون مش قادرين فيها حتى نتكلم، بس افتكري دايماً إن ربنا جنبك ومعاك... وكل حاجة هتعدي .. كلنا بندعيلك وانتي في قلبنا على طول ... مينفعش العينين الحلوين دولا يزعلوا ... قومي اعمليلك حاجة تفرحك ... او كلميني انا موجودة على طول عشانك ... روقي يا جميلة، ضيقتك دي غالية علينا",
-                audio: "" // هتحطي روابط فويسات العيلة هنا مستقبلاً
+                audio: "" 
             },
             {
                 title: "رسالة تطمنك..",
@@ -449,40 +468,41 @@
             }
         ];
 
-        let canCloseModal = true; // متغير للتحكم في قفل الصفحة
+        let canCloseModal = true; 
+        let chargeTimer = null;
+        let chargePercent = 0;
 
         function openDose(index) {
             const dose = dosesData[index];
             canCloseModal = true;
-            document.getElementById('modal-close-x').style.display = "block"; // إظهار زر القفل العادي
+            document.getElementById('modal-close-x').style.display = "block"; 
 
             document.getElementById('modal-title').innerText = dose.title;
             document.getElementById('modal-text').innerText = dose.text;
             
-            // حقن الأنيميشن والتفاعل الذكي المخصوص حسب رقم الكارت المفتوح
             const zone = document.getElementById('dynamic-interaction-zone');
-            zone.innerHTML = ""; // تصفية القديم
+            zone.innerHTML = ""; 
 
             if (index === 0) {
-                // 🌟 الحالة 1: زرار "لا" اللي بيهرب ومش هتقفل غير لما توافق تفرح نفسها!
+                // 🌟 الحالة 1: زرار لا بيهرب والرسالة مجهزة تطلع جوا الموقع
                 canCloseModal = false;
-                document.getElementById('modal-close-x').style.display = "none"; // إخفاء زر الاكس عشان نجبرها تلعب
+                document.getElementById('modal-close-x').style.display = "none"; 
                 
                 zone.innerHTML = `
                     <p class="game-title">هتقومي حالا تعملي حاجة تفرحك وتعدل مودك؟</p>
-                    <div class="game-buttons">
+                    <div class="game-buttons" id="game-btn-container">
                         <button class="btn-style btn-yes" onclick="forceUnlockDose()">خلاص هقوم حالاٌ</button>
                         <button class="btn-style btn-no" id="escape-no" onmouseenter="escapeNoBtn()" onclick="escapeNoBtn()" ontouchstart="escapeNoBtn()">لا</button>
                     </div>
                 `;
-                // وضع زرار لا في موقعه الابتدائي المظبوط
                 setTimeout(() => {
                     const noBtn = document.getElementById('escape-no');
-                    if(noBtn) { noBtn.style.left = "30px"; noBtn.style.top = "5px"; }
+                    if(noBtn) { noBtn.style.left = "65%"; noBtn.style.top = "10px"; }
                 }, 50);
 
             } else if (index === 1) {
-                // 🌟 الحالة 2: شحن طاقة الثقة بالضغط المطول 3 ثواني
+                // 🌟 الحالة 2: شحن الطاقة (Hold)
+                chargePercent = 0;
                 zone.innerHTML = `
                     <div class="charge-box">
                         <p class="game-title">المسي الزرار ضغطة طويلة (Hold) لشحن طاقة الأمان..</p>
@@ -492,12 +512,12 @@
                     </div>
                 `;
             } else if (index === 2) {
-                // 🌟 الحالة 3: زرار تطيير قلوب الونس والحضن الرقمي
+                // 🌟 الحالة 3: تطيير قلوب
                 zone.innerHTML = `
                     <button class="btn-style hug-btn" onclick="triggerDigitalHug(event)">اضغطي هنا لإلغاء المسافات وبعت حضن 🤍</button>
                 `;
             } else if (index === 3) {
-                // 🌟 الحالة 4: طبقة قشط الشاشة لرؤية الدعوة المتدارية
+                // 🌟 الحالة 4: الخربشة النظيفة
                 zone.innerHTML = `
                     <p class="game-title">امسحي الطبقة الرمادية بصباعك ..</p>
                     <div class="scratch-container">
@@ -505,10 +525,9 @@
                         <canvas id="canvas-scratch" class="scratch-canvas"></canvas>
                     </div>
                 `;
-                setTimeout(() => { initScratchEffect(); }, 50);
+                setTimeout(() => { initScratchEffect(); }, 100);
             }
 
-            // تفعيل مشغل الصوت السري المستقبلي لو الروابط انحطت
             const audioContainer = document.getElementById('audio-container');
             const audioElement = document.getElementById('dose-audio');
             if (dose.audio && dose.audio !== "") {
@@ -522,27 +541,29 @@
             document.getElementById('dose-modal').classList.add('active');
         }
 
-        // دالة الهروب الذكي لزرار "لا"
+        // دالة هروب زر "لا"
         function escapeNoBtn() {
             const noBtn = document.getElementById('escape-no');
             if (!noBtn) return;
-            // حساب مسارات عشوائية ومشاكسة جوة مساحة محددة عشان ميتلمسش
-            const randomX = Math.floor(Math.random() * 160) - 80;
-            const randomY = Math.floor(Math.random() * 40) - 20;
-            
+            const randomX = Math.floor(Math.random() * 140) - 70;
+            const randomY = Math.floor(Math.random() * 50) - 25;
             noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
-            noBtn.style.background = "#ff5252"; // يقلب أحمر شقاوة وهو بيهرب
+            noBtn.style.background = "#ff5252"; 
         }
 
+        // إظهار الرسالة دافية جوة الموقع نفسه والسماح بالقفل بعد 3 ثواني تلقائياً
         function forceUnlockDose() {
+            const container = document.getElementById('dynamic-interaction-zone');
+            container.innerHTML = `<p class="success-inline-msg">أيوا كدة! اضحكي وقومي دلعي نفسك يا جميلة 🤍</p>`;
+            
+            // تفعيل زر القفل والاكس الحين عشان تقدر تقفل براحتها
             canCloseModal = true;
-            closeDose();
+            document.getElementById('modal-close-x').style.display = "block";
         }
 
-        function closeDose() {
-            if (!canCloseModal) return;
-            document.getElementById('dose-modal').classList.remove('active');
-        }
-    </script>
-</body>
-</html>
+        // شحن الطاقة
+        function startCharging(e) {
+            e.preventDefault();
+            document.getElementById('p-container').style.display = "block";
+            const bar = document.getElementById('p-bar');
+            const status = document.get
