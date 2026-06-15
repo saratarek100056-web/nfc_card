@@ -59,6 +59,7 @@
             font-weight: 600;
         }
 
+        /* كروت الأبواب الأربعة الفوقية */
         .doses-list {
             display: flex;
             flex-direction: column;
@@ -112,6 +113,7 @@
             color: #bfaecf;
         }
 
+        /* الـ Modal الشفاف المصمم بـ Glassmorphism راقي جداً */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -193,6 +195,7 @@
             min-height: 80px;
         }
 
+        /* أزرار المشاكسة للحالة الأولى (مخنوقة) */
         .game-title {
             font-size: 0.95rem;
             color: #ffe07d;
@@ -216,7 +219,7 @@
             border-radius: 12px;
             border: none;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: transform 0.1s, background 0.2s;
         }
 
         .btn-yes {
@@ -249,6 +252,7 @@
             100% { opacity: 0.8; }
         }
 
+        /* حالة الشحن للحالة الثانية (حيرانة) */
         .charge-box {
             background: rgba(255, 255, 255, 0.03);
             border-radius: 16px;
@@ -292,6 +296,7 @@
             height: 100%;
             background: #ffe07d;
             box-shadow: 0 0 10px #ffe07d;
+            transition: width 0.1s linear;
         }
 
         .charge-status {
@@ -300,6 +305,7 @@
             margin-top: 8px;
         }
 
+        /* أنيميشن القلوب الطائرة للحالة الثالثة (أيام زمان) */
         .hug-btn {
             background: rgba(255, 224, 125, 0.15);
             color: #ffe07d;
@@ -321,6 +327,7 @@
             100% { transform: translateY(-160px) scale(1.5) rotate(25deg); opacity: 0; }
         }
 
+        /* طبقة القشط للحالة الرابعة (في بالي) */
         .scratch-container {
             position: relative;
             width: 100%;
@@ -345,7 +352,7 @@
             height: 100%;
             cursor: pointer;
             z-index: 5;
-            touch-action: none; 
+            touch-action: none; /* يمنع الموبايل من سحب الشاشة أثناء الخربشة */
         }
 
         .secret-message {
@@ -358,6 +365,9 @@
             line-height: 1.6;
         }
 
+        /* ==========================================================================
+           3. مشغل الصوت السري المستقبلي "جرعة طاقة زيادة"
+           ========================================================================== */
         .audio-player-wrapper {
             margin-top: 20px;
             padding-top: 15px;
@@ -382,7 +392,7 @@
 
     <div class="app-container">
         <div class="header-section">
-            <h1 class="main-title">لقلبكِ أنتِ وبس ✨</h1>
+            <h1 class="main-title"> لقلبكِ أنتِ وبس ✨</h1>
             <p class="hint-text">اختارِ الباب اللي محتاجه قلبكِ دلوقتي ..</p>
         </div>
 
@@ -441,11 +451,11 @@
             {
                 title: "تعالي روقي هنا..",
                 text: "لو فتحتي الباب ده وأنتِ مضايقة، أو حاسة بـ خنقة مش عارفة سببها، أو الأيام تقلت عليكي .. عايزاكي تاخدي نَفس طويل وتهوني على نفسك. عادي جداً نضعف وتمر علينا لحظات نكون مش قادرين فيها حتى نتكلم، بس افتكري دايماً إن ربنا جنبك ومعاك... وكل حاجة هتعدي .. كلنا بندعيلك وانتي في قلبنا على طول ... مينفعش العينين الحلوين دولا يزعلوا ... قومي اعمليلك حاجة تفرحك ... او كلميني انا موجودة على طول عشانك ... روقي يا جميلة، ضيقتك دي غالية علينا",
-                audio: "" 
+                audio: "" // هتحطي روابط فويسات العيلة هنا مستقبلاً
             },
             {
                 title: "رسالة تطمنك..",
-                text: "انا عارفة الحياة صعبة وممكن تدخلنا في متاهات وتفاصيل جديدة بتخلينا نحس بـ حيرة أو خوف من الجاي، ومبنكونش عارفين إحنا ماشيين صح ولا غلط.. في اللحظة دي، اقفلي عينك وسيبك امرك كله لربنا ... ربنا عارف الخير ليك ... هييسره ليك...متخليش القلق يسرق منك هدوءك ولا ضحكتك، وسيبي بكرة لربنا. مهما كانت الخطوة الجاية غامضة، ربنا معاك وانتِ قدها, وافتكري دايماً إن ليكي أخت في ضهرك، سند ليكي في كل الاحتمالات ومن غير ما تسألك عن أي تفاصيل.",
+                text: "انا عارفة الحياة صعبة وممكن تدخلنا في متاهات وتفاصيل جديدة بتخلينا نحس بـ حيرة أو خوف من الجاي، ومبنكونش عارفين إحنا ماشيين صح ولا غلط.. في اللحظة دي، اقفلي عينك وسيبك امرك كله لربنا ... ربنا عارف الخير ليك ... هييسره ليك...متخليش القلق يسرق منك هدوءك ولا ضحكتك، وسيبي بكرة لربنا. مهما كانت الخطوة الجاية غامضة، ربنا معاك وانتِ قدها، وافتكري دايماً إن ليكي أخت في ضهرك، سند ليكي في كل الاحتمالات ومن غير ما تسألك عن أي تفاصيل.",
                 audio: ""
             },
             {
@@ -476,6 +486,7 @@
             zone.innerHTML = ""; 
 
             if (index === 0) {
+                // 🌟 الحالة 1: زرار لا بيهرب في مساحة واسعة جداً
                 canCloseModal = false;
                 document.getElementById('modal-close-x').style.display = "none"; 
                 
@@ -492,6 +503,7 @@
                 }, 50);
 
             } else if (index === 1) {
+                // 🌟 الحالة 2: شحن الطاقة (Hold)
                 chargePercent = 0;
                 zone.innerHTML = `
                     <div class="charge-box">
@@ -502,10 +514,12 @@
                     </div>
                 `;
             } else if (index === 2) {
+                // 🌟 الحالة 3: تطيير قلوب
                 zone.innerHTML = `
                     <button class="btn-style hug-btn" onclick="triggerDigitalHug(event)">اضغطي هنا لإلغاء المسافات وبعت حضن 🤍</button>
                 `;
             } else if (index === 3) {
+                // 🌟 الحالة 4: الخربشة
                 zone.innerHTML = `
                     <p class="game-title">امسحي الطبقة الرمادية بصباعك ..</p>
                     <div class="scratch-container">
@@ -529,15 +543,17 @@
             document.getElementById('dose-modal').classList.add('active');
         }
 
+        // دالة هروب زر "لا" بمساحة أكبر كتير
         function escapeNoBtn() {
             const noBtn = document.getElementById('escape-no');
             if (!noBtn) return;
-            const randomX = Math.floor(Math.random() * 140) - 70;
-            const randomY = Math.floor(Math.random() * 50) - 25;
+            const randomX = Math.floor(Math.random() * 260) - 130;
+            const randomY = Math.floor(Math.random() * 100) - 50;
             noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
             noBtn.style.background = "#ff5252"; 
         }
 
+        // إظهار الرسالة الدافية جوة الموقع نفسه لما توافق
         function forceUnlockDose() {
             const container = document.getElementById('dynamic-interaction-zone');
             container.innerHTML = `<p class="success-inline-msg">أيوا كدة! اضحكي وقومي دلعي نفسك يا جميلة 🤍</p>`;
@@ -545,6 +561,18 @@
             document.getElementById('modal-close-x').style.display = "block";
         }
 
+        // رسالة تنبيه لو حاولت تقفل من غير ما توافق الأول
+        function closeDose() {
+            if (!canCloseModal) {
+                alert("تؤ تؤ.. مش هيقفل غير لما توافقي وتقومي تفرحي نفسك! 😜");
+                return;
+            }
+            document.getElementById('dose-modal').classList.remove('active');
+            const audioEl = document.getElementById('dose-audio');
+            if(audioEl) audioEl.pause();
+        }
+
+        // شحن الطاقة
         function startCharging(e) {
             e.preventDefault();
             document.getElementById('p-container').style.display = "block";
@@ -581,6 +609,7 @@
             }
         }
 
+        // تطيير القلوب
         function triggerDigitalHug(e) {
             const clientX = e.clientX || (e.touches && e.touches[0].clientX) || window.innerWidth/2;
             const clientY = e.clientY || (e.touches && e.touches[0].clientY) || window.innerHeight/2;
@@ -598,6 +627,7 @@
             }
         }
 
+        // الخربشة المتكاملة
         function initScratchEffect() {
             const canvas = document.getElementById('canvas-scratch');
             if(!canvas) return;
@@ -641,12 +671,6 @@
             canvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); });
             canvas.addEventListener('touchmove', scratch);
             window.addEventListener('touchend', () => isDrawing = false);
-        }
-
-        function closeDose() {
-            if (!canCloseModal) return;
-            document.getElementById('dose-modal').classList.remove('active');
-            document.getElementById('dose-audio').pause();
         }
     </script>
 </body>
