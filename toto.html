@@ -494,7 +494,7 @@
                     <p class="game-title">هتقومي حالا تعملي حاجة تفرحك وتعدل مودك؟</p>
                     <div class="game-buttons" id="game-btn-container">
                         <button class="btn-style btn-yes" onclick="forceUnlockDose()">خلاص هقوم حالاٌ</button>
-                        <button class="btn-style btn-no" id="escape-no" onmouseenter="escapeNoBtn()" onclick="escapeNoBtn()" ontouchstart="escapeNoBtn()">لا</button>
+                        <button class="btn-style btn-no" id="escape-no" onmouseenter="escapeNoBtn()" ontouchstart="escapeNoBtn()" onclick="alert('تؤ تؤ.. مفيش لا! مش هتقفل الا لما تقومي تعملي حاجة تفرحك 😜')">لا</button>
                     </div>
                 `;
                 setTimeout(() => {
@@ -547,8 +547,9 @@
         function escapeNoBtn() {
             const noBtn = document.getElementById('escape-no');
             if (!noBtn) return;
-            const randomX = Math.floor(Math.random() * 260) - 130;
-            const randomY = Math.floor(Math.random() * 100) - 50;
+            // كبرنا المساحة جداً هنا عشان يهرب أبعد
+            const randomX = Math.floor(Math.random() * 350) - 175;
+            const randomY = Math.floor(Math.random() * 250) - 125;
             noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
             noBtn.style.background = "#ff5252"; 
         }
