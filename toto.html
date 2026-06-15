@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ملاذ الروح والونس</title>
-    <!-- استدعاء خط Cairo المودرن والناعم -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -22,6 +21,7 @@
         }
 
         body {
+            /* خلفية بتدرج بنفسجي ليلى ساحر وعميق جداً مريح للعين */
             background: linear-gradient(135deg, #0d0614 0%, #1a0b2e 50%, #0d0614 100%);
             color: #ffffff;
             min-height: 100vh;
@@ -345,7 +345,7 @@
             height: 100%;
             cursor: pointer;
             z-index: 5;
-            touch-action: none; /* يمنع الموبايل من سحب الشاشة أثناء الخربشة */
+            touch-action: none; 
         }
 
         .secret-message {
@@ -387,7 +387,6 @@
         </div>
 
         <div class="doses-list">
-            <!-- الكارت 1 -->
             <div class="dose-card" onclick="openDose(0)">
                 <div class="dose-icon">🤍</div>
                 <div class="dose-info">
@@ -396,7 +395,6 @@
                 </div>
             </div>
 
-            <!-- الكارت 2 -->
             <div class="dose-card" onclick="openDose(1)">
                 <div class="dose-icon">⚓</div>
                 <div class="dose-info">
@@ -405,7 +403,6 @@
                 </div>
             </div>
 
-            <!-- الكارت 3 -->
             <div class="dose-card" onclick="openDose(2)">
                 <div class="dose-icon">⏳</div>
                 <div class="dose-info">
@@ -414,7 +411,6 @@
                 </div>
             </div>
 
-            <!-- الكارت 4 -->
             <div class="dose-card" onclick="openDose(3)">
                 <div class="dose-icon">✨</div>
                 <div class="dose-info">
@@ -425,7 +421,6 @@
         </div>
     </div>
 
-    <!-- الـ Modal الرئيسي -->
     <div id="dose-modal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-btn" id="modal-close-x" onclick="closeDose()">&times;</span>
@@ -441,9 +436,6 @@
         </div>
     </div>
 
-    <!-- ==========================================================================
-       4. هندسة المنطق والمشاكسة التفاعلية (JavaScript المتكامل والمصلح)
-       ========================================================================== -->
     <script>
         const dosesData = [
             {
@@ -453,7 +445,7 @@
             },
             {
                 title: "رسالة تطمنك..",
-                text: "انا عارفة الحياة صعبة وممكن تدخلنا في متاهات وتفاصيل جديدة بتخلينا نحس بـ حيرة أو خوف من الجاي، ومبنكونش عارفين إحنا ماشيين صح ولا غلط.. في اللحظة دي، اقفلي عينك وسيبك امرك كله لربنا ... ربنا عارف الخير ليك ... هييسره ليك...متخليش القلق يسرق منك هدوءك ولا ضحكتك، وسيبي بكرة لربنا. مهما كانت الخطوة الجاية غامضة، ربنا معاك وانتِ قدها، وافتكري دايماً إن ليكي أخت في ضهرك، سند ليكي في كل الاحتمالات ومن غير ما تسألك عن أي تفاصيل.",
+                text: "انا عارفة الحياة صعبة وممكن تدخلنا في متاهات وتفاصيل جديدة بتخلينا نحس بـ حيرة أو خوف من الجاي، ومبنكونش عارفين إحنا ماشيين صح ولا غلط.. في اللحظة دي، اقفلي عينك وسيبك امرك كله لربنا ... ربنا عارف الخير ليك ... هييسره ليك...متخليش القلق يسرق منك هدوءك ولا ضحكتك، وسيبي بكرة لربنا. مهما كانت الخطوة الجاية غامضة، ربنا معاك وانتِ قدها, وافتكري دايماً إن ليكي أخت في ضهرك، سند ليكي في كل الاحتمالات ومن غير ما تسألك عن أي تفاصيل.",
                 audio: ""
             },
             {
@@ -484,7 +476,6 @@
             zone.innerHTML = ""; 
 
             if (index === 0) {
-                // 🌟 الحالة 1: زرار لا بيهرب والرسالة مجهزة تطلع جوا الموقع
                 canCloseModal = false;
                 document.getElementById('modal-close-x').style.display = "none"; 
                 
@@ -501,7 +492,6 @@
                 }, 50);
 
             } else if (index === 1) {
-                // 🌟 الحالة 2: شحن الطاقة (Hold)
                 chargePercent = 0;
                 zone.innerHTML = `
                     <div class="charge-box">
@@ -512,12 +502,10 @@
                     </div>
                 `;
             } else if (index === 2) {
-                // 🌟 الحالة 3: تطيير قلوب
                 zone.innerHTML = `
                     <button class="btn-style hug-btn" onclick="triggerDigitalHug(event)">اضغطي هنا لإلغاء المسافات وبعت حضن 🤍</button>
                 `;
             } else if (index === 3) {
-                // 🌟 الحالة 4: الخربشة النظيفة
                 zone.innerHTML = `
                     <p class="game-title">امسحي الطبقة الرمادية بصباعك ..</p>
                     <div class="scratch-container">
@@ -541,7 +529,6 @@
             document.getElementById('dose-modal').classList.add('active');
         }
 
-        // دالة هروب زر "لا"
         function escapeNoBtn() {
             const noBtn = document.getElementById('escape-no');
             if (!noBtn) return;
@@ -551,19 +538,116 @@
             noBtn.style.background = "#ff5252"; 
         }
 
-        // إظهار الرسالة دافية جوة الموقع نفسه والسماح بالقفل بعد 3 ثواني تلقائياً
         function forceUnlockDose() {
             const container = document.getElementById('dynamic-interaction-zone');
             container.innerHTML = `<p class="success-inline-msg">أيوا كدة! اضحكي وقومي دلعي نفسك يا جميلة 🤍</p>`;
-            
-            // تفعيل زر القفل والاكس الحين عشان تقدر تقفل براحتها
             canCloseModal = true;
             document.getElementById('modal-close-x').style.display = "block";
         }
 
-        // شحن الطاقة
         function startCharging(e) {
             e.preventDefault();
             document.getElementById('p-container').style.display = "block";
             const bar = document.getElementById('p-bar');
-            const status = document.get
+            const status = document.getElementById('c-status');
+            const btn = document.getElementById('hold-charge-btn');
+
+            if(chargeTimer) clearInterval(chargeTimer);
+
+            chargeTimer = setInterval(() => {
+                if (chargePercent < 100) {
+                    chargePercent += 5;
+                    bar.style.width = chargePercent + "%";
+                    status.innerText = `جاري الشحن: ${chargePercent}%`;
+                    btn.style.background = `rgba(255,224,125, ${chargePercent/100})`;
+                } else {
+                    clearInterval(chargeTimer);
+                    status.innerHTML = "✨ <b>تم الشحن بنجاح 100%! أنتِ قدها وبكرة بتاعكِ!</b> ✨";
+                    btn.innerText = "💪";
+                }
+            }, 100);
+        }
+
+        function stopCharging() {
+            if(chargeTimer) clearInterval(chargeTimer);
+            if (chargePercent < 100) {
+                chargePercent = 0;
+                const bar = document.getElementById('p-bar');
+                if(bar) bar.style.width = "0%";
+                const status = document.getElementById('c-status');
+                if(status) status.innerText = "انقطع الاتصال.. المسي الضغطة تانى من الأول وشدي الحيل";
+                const btn = document.getElementById('hold-charge-btn');
+                if(btn) btn.style.background = "rgba(255,224,125, 0.1)";
+            }
+        }
+
+        function triggerDigitalHug(e) {
+            const clientX = e.clientX || (e.touches && e.touches[0].clientX) || window.innerWidth/2;
+            const clientY = e.clientY || (e.touches && e.touches[0].clientY) || window.innerHeight/2;
+
+            for(let i=0; i<10; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.innerText = i % 2 === 0 ? '🤍' : '💛';
+                heart.style.left = (clientX + (Math.random() * 60 - 30)) + 'px';
+                heart.style.top = (clientY + (Math.random() * 40 - 20)) + 'px';
+                heart.style.animationDelay = (Math.random() * 0.2) + 's';
+                document.body.appendChild(heart);
+                
+                setTimeout(() => { heart.remove(); }, 1200);
+            }
+        }
+
+        function initScratchEffect() {
+            const canvas = document.getElementById('canvas-scratch');
+            if(!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const container = canvas.parentElement;
+            
+            canvas.width = container.offsetWidth;
+            canvas.height = container.offsetHeight;
+
+            ctx.fillStyle = '#4a3564';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.font = '15px Cairo';
+            ctx.fillStyle = '#bfaecf';
+            ctx.textAlign = 'center';
+            ctx.fillText('امسحي بصباعكِ هنا.. 🤍', canvas.width/2, canvas.height/2 + 5);
+
+            let isDrawing = false;
+            
+            function getPos(e) {
+                const rect = canvas.getBoundingClientRect();
+                if (e.touches && e.touches.length > 0) {
+                    return { x: e.touches[0].clientX - rect.left, y: e.touches[0].clientY - rect.top };
+                }
+                return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+            }
+
+            function scratch(e) {
+                if (!isDrawing) return;
+                const pos = getPos(e);
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.beginPath();
+                ctx.arc(pos.x, pos.y, 18, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            canvas.addEventListener('mousedown', (e) => { isDrawing = true; scratch(e); });
+            canvas.addEventListener('mousemove', scratch);
+            window.addEventListener('mouseup', () => isDrawing = false);
+
+            canvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); });
+            canvas.addEventListener('touchmove', scratch);
+            window.addEventListener('touchend', () => isDrawing = false);
+        }
+
+        function closeDose() {
+            if (!canCloseModal) return;
+            document.getElementById('dose-modal').classList.remove('active');
+            document.getElementById('dose-audio').pause();
+        }
+    </script>
+</body>
+</html>
